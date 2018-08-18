@@ -8,7 +8,7 @@
 - 定义处理类型时所有语言都必须遵守的一组规则(CLS)。
 - 提供包含应用程序开发中使用的基本基元数据类型（如 Boolean、Byte、Char 等）的库。
 
-***CLS***是CTS（Common Type System 公共类型系统）这个体系中的子集。
+**CLS**是CTS（Common Type System 公共类型系统）这个体系中的子集。
 
 一个编程语言，如果它能够支持CTS，那么我们就称它为面向.NET平台的语言。
 
