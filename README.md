@@ -100,7 +100,7 @@ C#,dotnet
 - [从线程模型的角度看 Netty 为什么是高性能的？](https://crossoverjie.top/2018/07/04/netty/Netty(2)Thread-model/)
 
 ### C# 7.0 新增功能
-- [Deconstruct](https://github.com/kaanid/goto_dotnet/md/Deconstruct.md)
+- [Deconstruct](https://github.com/kaanid/goto_dotnet/blob/master/md/Deconstruct.md)
 
 ### 附加技能
 
