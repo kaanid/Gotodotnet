@@ -99,8 +99,14 @@ C#,dotnet
 - [SpringBoot 整合长连接心跳机制](https://crossoverjie.top/2018/05/24/netty/Netty(1)TCP-Heartbeat/)
 - [从线程模型的角度看 Netty 为什么是高性能的？](https://crossoverjie.top/2018/07/04/netty/Netty(2)Thread-model/)
 
+### C# 7.0 新增功能
+- [Deconstruct](https://github.com/kaanid/goto_dotnet/md/Deconstruct.md)
+
 ### 附加技能
 
 - [TCP/IP 协议](https://github.com/crossoverJie/JCSprout/blob/master/MD/TCP-IP.md)
 - [一个学渣的阿里之路](https://crossoverjie.top/2018/06/21/personal/Interview-experience/)
 
+### 工具
+
+- [windbg内存分析工具](http://www.windbg.org/)
