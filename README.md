@@ -125,3 +125,4 @@ C#,dotnet
 
 - [windbg内存分析工具](http://www.windbg.org/)
 - [debugview](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview)
+- [DnsAgent](https://github.com/stackia/DNSAgent)
