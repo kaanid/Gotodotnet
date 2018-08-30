@@ -75,6 +75,7 @@ C#,dotnet
 - Quartz.net
 - [Hangfire](http://docs.geteventflow.net/index.html)
 - Topshelf
+- [Exceptionless](https://github.com/exceptionless/Exceptionless)
 
 
 
