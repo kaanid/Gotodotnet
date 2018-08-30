@@ -99,8 +99,15 @@ C#,dotnet
 - [SpringBoot 整合长连接心跳机制](https://crossoverjie.top/2018/05/24/netty/Netty(1)TCP-Heartbeat/)
 - [从线程模型的角度看 Netty 为什么是高性能的？](https://crossoverjie.top/2018/07/04/netty/Netty(2)Thread-model/)
 
+### Thrift 相关
+- [example](https://github.com/kaanid/ThriftDome)
+
 ### C# 7.0 新增功能
 - [Deconstruct](https://github.com/kaanid/goto_dotnet/blob/master/md/Deconstruct.md)
+
+### 设计模式
+
+- [Specification Pattern 规约模式](https://github.com/kaanid/SpecificationPattern)
 
 ### 附加技能
 
@@ -110,3 +117,4 @@ C#,dotnet
 ### 工具
 
 - [windbg内存分析工具](http://www.windbg.org/)
+- [debugview](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview)
