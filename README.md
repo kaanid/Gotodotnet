@@ -67,7 +67,14 @@ C#,dotnet
 - [Spring AOP 的实现原理](https://github.com/crossoverJie/JCSprout/blob/master/MD/SpringAOP.md) 
 - [Guava 源码分析（Cache 原理）](https://crossoverjie.top/2018/06/13/guava/guava-cache/)
 - SpringBoot 启动过程
-- Tomcat 类加载机制
+- [Dotnet](https://github.com/microsoft/dotnet)
+- [ASP.NET Core 2.1](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-2.1)
+- [Framework 45 源码](https://referencesource.microsoft.com/)
+- AutoFac
+- Mapper
+- Quartz.net
+- Topshelf
+
 
 
 ### 架构设计
