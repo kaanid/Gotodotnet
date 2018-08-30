@@ -73,6 +73,7 @@ C#,dotnet
 - AutoFac
 - Mapper
 - Quartz.net
+- [Hangfire](http://docs.geteventflow.net/index.html)
 - Topshelf
 
 
