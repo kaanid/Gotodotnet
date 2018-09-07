@@ -26,6 +26,11 @@ C#,dotnet,asp.net core
 | :--------: | :---------: | :---------: | :---------: | :---------: | :---------:| :---------: | :-------: | :-------:| :------:|:------:|
 | [集合](#常用集合) | [多线程](#csharp-多线程)|[CLR](#CLR) | [分布式](#分布式相关) |[框架](#常用框架第三方组件)|[架构设计](#架构设计)| [数据库](#db-相关) |[算法](#数据结构与算法)|[Netty](#netty-相关)| [附加技能](#附加技能)|[联系作者](#联系作者) |
 
+### C# 中的新增功能
+- [C# 7.3](https://docs.microsoft.com/zh-cn/dotnet/csharp/whats-new/csharp-7-3)
+- [C# 7.2](https://docs.microsoft.com/zh-cn/dotnet/csharp/whats-new/csharp-7-2)
+- [C# 7.1](https://docs.microsoft.com/zh-cn/dotnet/csharp/whats-new/csharp-7-1)
+- [C# 7.0](https://docs.microsoft.com/zh-cn/dotnet/csharp/whats-new/csharp-7)
 
 
 ### 常用集合
