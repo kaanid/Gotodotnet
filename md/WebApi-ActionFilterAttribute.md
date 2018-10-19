@@ -63,28 +63,24 @@
         protected override IList<JsonProperty> CreateProperties(Type type, MemberSerialization memberSerialization)
         {
             var list = base.CreateProperties(type, memberSerialization);
-            var n = list.Count;
             list = list.Where(m => m.PropertyName != "__isset")?.ToList();
-            var isThrift = n != list.Count;
 
-            if (isThrift)
+            foreach (var m in list)
             {
-                foreach (var m in list)
-                {
-                    if (m.PropertyType.FullName != "System.Int64")
-                        continue;
+                if (m.PropertyType.FullName != "System.Int64")
+                    continue;
 
-                    var propName = m.PropertyName.ToLower();
-                    foreach (var str in arrTimeFlag)
+                var propName = m.PropertyName.ToLower();
+                foreach (var str in arrTimeFlag)
+                {
+                    if (propName.EndsWith(str))
                     {
-                        if (propName.EndsWith(str))
-                        {
-                            m.Converter = new JsonIsoDateTimeConverter();
-                            break;
-                        }
+                        m.Converter = new JsonIsoDateTimeConverter();
+                        break;
                     }
                 }
             }
+            
             return list;
         }
     }
