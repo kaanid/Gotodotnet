@@ -6,15 +6,25 @@ public static class Extensions
         public static IEnumerable<T> ToList<T>(this DataTable dt) where T : class, new()
         {
             IList<T> list = new List<T>();
+            if (dt == null || dt.Rows.Count==0)
+                return list;
+
             PropertyInfo[] typeProps = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            string[] arrColumns = new string[dt.Columns.Count];
+            for(int i=0;i< dt.Columns.Count;i++)
+            {
+                arrColumns[i] = dt.Columns[i].ColumnName.ToLower();
+            }
+
             foreach (var m in dt.Rows)
             {
                 var dr2 = (DataRow)m;
-
+                
+                var columns = dt.Columns.Count;
                 foreach (var p in typeProps)
                 {
                     var t = new T();
-                    if (dt.Columns.Contains(p.Name))
+                    if (arrColumns.Contains(p.Name.ToLower()))
                     {
                         object obj = dr2[p.Name];
                         if (obj == null || obj.GetType() == typeof(DBNull))
