@@ -138,3 +138,6 @@ C#,dotnet,asp.net core
 - [windbg内存分析工具](http://www.windbg.org/)
 - [debugview](https://docs.microsoft.com/en-us/sysinternals/downloads/debugview)
 - [DnsAgent](https://github.com/stackia/DNSAgent)
+
+### 常用方法
+- [DataTabe转List<T>](https://github.com/kaanid/goto_dotnet/blob/master/md/DataTableToList.md)
