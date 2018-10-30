@@ -53,3 +53,11 @@ public static class Extensions
         }
     }
 ```
+
+
+#### DataTable To List<T> Run:10000
+1. Benchmark 1 Reflection ms:289
+2. Benchmark 2 set ms:233
+3. Benchmark 3 Expressions ms:319
+4. Benchmark 4 Emit ms:33
+    
