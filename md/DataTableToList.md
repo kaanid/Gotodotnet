@@ -6,7 +6,6 @@ public static class Extensions
         public static IEnumerable<T> ToList<T>(this DataTable dt) where T : class, new()
         {
             IList<T> list = new List<T>();
-
             PropertyInfo[] typeProps = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (var m in dt.Rows)
             {
@@ -18,7 +17,7 @@ public static class Extensions
                     if (dt.Columns.Contains(p.Name))
                     {
                         object obj = dr2[p.Name];
-                        if (obj == null)
+                        if (obj == null || obj.GetType() == typeof(DBNull))
                         {
                             continue;
                         }
@@ -28,8 +27,7 @@ public static class Extensions
                             var genericType = Nullable.GetUnderlyingType(type);
                             if (genericType != null)
                             {
-                                if (obj.GetType() != typeof(DBNull))
-                                    p.SetValue(t, Convert.ChangeType(obj, genericType), null);
+                                p.SetValue(t, Convert.ChangeType(obj, genericType), null);
                             }
                         }
                         else
