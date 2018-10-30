@@ -140,4 +140,4 @@ C#,dotnet,asp.net core
 - [DnsAgent](https://github.com/stackia/DNSAgent)
 
 ### 常用方法
-- [DataTabe转List<T>](https://github.com/kaanid/goto_dotnet/blob/master/md/DataTableToList.md)
+- [DataTabe转List<T>扩展](https://github.com/kaanid/goto_dotnet/blob/master/md/DataTableToList.md)
