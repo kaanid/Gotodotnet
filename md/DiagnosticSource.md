@@ -24,7 +24,8 @@
  在 .NET Framework 中 EventSource 通过 Windows ETW 提供的 ETW Channels 与其进行集成，下面给出一个示例代码： 
  
  ```
- cs [EventSource(Name = "Samples-EventSourceDemos-Minimal")] 
+ cs 
+ [EventSource(Name = "Samples-EventSourceDemos-Minimal")] 
  public sealed class MinimalEventSource : EventSource 
  { 
      // Define singleton instance 
@@ -54,11 +55,13 @@
  
  如何生成 Diagnostic 日志记录呢？首先，我们需要创建一个 `DiagnosticListener` 对象，比如： 
  ```
- cs private static DiagnosticSource httpLogger = new DiagnosticListener("System.Net.Http"); 
+ cs 
+ private static DiagnosticSource httpLogger = new DiagnosticListener("System.Net.Http"); 
  ``` 
  `DiagnosticListener` 参数中的名称即为需要监听的事件（组件）名称，这个名称在以后会被用来被它的消费者所订阅使用。 `DiagnosticSource` 其核心只包含了两个方法，分别是 ： 
  ```
-  bool IsEnabled(string name) void Write(string name, object value); 
+  bool IsEnabled(string name) 
+  void Write(string name, object value); 
 
 ``` 
 那么然后我们可以这样来调用： 
@@ -75,22 +78,82 @@ if (httpLogger.IsEnabled("RequestStart"))
 在监听 Diagnostic 日志记录之前你需要知道你要关心的事件数据名称，那么如果仅仅是在代码中把 `DiagnosticListeners` 都写死到监听的消费者代码中的话，这样就太不灵活了，所以这里设计了一个机制用来发现中那些在运行时被激活的`DiagnosticListeners`。 你可以使用 `DiagnosticListener.AllListeners` 来获取一个 `IObservable`对象，`IObservable`接口大家应该都不陌生了吧（不太清楚的可以看[这里](https://msdn.microsoft.com/library/hh242985.aspx)），然后通过其`Subscribe`方法进行OnNext“回调”关心的事件数据。 示例代码： 
 ```
 cs 
-static IDisposable networkSubscription = null; // 使用 AllListeners 来获取所有的DiagnosticListeners对象，传入一个IObserver 回调 
 
-static IDisposable listenerSubscription = DiagnosticListener.AllListeners.Subscribe(delegate (DiagnosticListener listener) { 
-    // 当 DiagnosticsListener 激活的时候，这里将获得一个回调用 
-    if (listener.Name == "System.Net.Http") 
-    { 
-        // 订阅者监听消费代码 
-        lock(allListeners) { 
-            if (networkSubscription != null) 
-                networkSubscription.Dispose(); //回调业务代码 
-                <Action> callback = (KeyValuePair evnt) => Console.WriteLine("From Listener {0} Received Event {1} with payload {2}", networkListener.Name, evnt.Key, evnt.Value); 
-                //创建一个匿名Observer对象 Observer> observer = new AnonymousObserver>(callback); //筛选你感兴趣的事件 
-                Predicate predicate = (string eventName) => eventName == "RequestStart"; networkSubscription = listener.Subscribe(observer, predicate); 
-        } 
-    } 
-    }); // 通常情况下，这里你需要保持 listenerSubscription 始终处于激活状态， // 如果你像取消回调，你可以调用 listenerSubscription.Dispose() 来取消订阅者 
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Reactive;
+
+class Program
+    {
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            var log= new DiagnosticListener("System.Net.Http");
+            new DiagnosticManage().Init();
+
+            if (log.IsEnabled("RequestStart"))
+            {
+                log.Write("RequestStart", new { Url = "http://clr", Request = "haaaaa" });
+            }
+
+            var log2 = new DiagnosticListener("Temp");
+            if (log2.IsEnabled("TempStart"))
+            {
+                log2.Write("TempStart", new { Url = "http://clr", Request = "haaaaa" });
+            }
+
+        }
+    }
+
+    public class DiagnosticManage
+    {
+        static object objLock = new object();
+        static IDisposable networkSubscription = null;
+        public void Init()
+        {
+            
+            var listenerSubscription = DiagnosticListener.AllListeners.Subscribe((DiagnosticListener listener)=>{
+                if (listener.Name == "System.Net.Http")
+                {
+                    // 订阅者监听消费代码 
+                    lock (objLock)
+                    {
+                        if (networkSubscription != null)
+                            networkSubscription.Dispose(); //回调业务代码 
+
+                        Action<KeyValuePair<string,object>> callback =(evnt) => {
+
+                            Console.WriteLine("From Listener {0} Received Event {1} with payload {2}", listener.Name, evnt.Key, evnt.Value);
+
+                        };
+
+                        //创建一个匿名Observer对象 
+                        IObserver<KeyValuePair<string, object>> observer = new AnonymousObserver<KeyValuePair<string, object>>(callback); //筛选你感兴趣的事件 
+                        Predicate<string> predicate = (string eventName) => eventName == "RequestStart";
+
+                        networkSubscription = listener.Subscribe(observer, predicate);
+                    }
+                }
+                else
+                {
+                    Action<KeyValuePair<string, object>> callback = (evnt) => {
+
+                        Console.WriteLine("From Listener {0} Received Event {1} with payload {2}", listener.Name, evnt.Key, evnt.Value);
+
+                    };
+
+                    //创建一个匿名Observer对象 
+                    IObserver<KeyValuePair<string, object>> observer = new AnonymousObserver<KeyValuePair<string, object>>(callback); //筛选你感兴趣的事件 
+                    Predicate<string> predicate = (string eventName) => eventName == "TempStart";
+
+                    listener.Subscribe(observer, predicate);
+                }
+            });
+        }
+    }
+
 
 ``` 
 
