@@ -134,6 +134,10 @@ C#,dotnet,asp.net core
 ### C# 7.0 新增功能
 - [Deconstruct](https://github.com/kaanid/goto_dotnet/blob/master/md/Deconstruct.md)
 
+### .net core 3 新增功能
+
+- [分层编译](https://www.cnblogs.com/xiaoliangge/p/9441988.html)
+
 ### 设计模式
 
 - [Specification Pattern 规约模式](https://github.com/kaanid/SpecificationPattern)
